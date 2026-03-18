@@ -37,6 +37,10 @@ Base URL: `http://127.0.0.1:8000`
 
 All endpoints are prefixed with `/api/`.
 
+### Welcome
+
+- `GET /api/welcome/` - Simple welcome message to confirm the API is running
+
 ### Employees
 
 - `POST /api/employee-register/` - Create employee (employee code is auto-generated, e.g. `EMP001`)

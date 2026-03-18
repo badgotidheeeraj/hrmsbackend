@@ -8,6 +8,15 @@ from .serializers import EmployeeSerializer, AttendanceSerializer
 from .services.employee import EmployeeLogic
 
 
+class WelcomeView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        return Response({
+            "message": "Welcome to the HRMS Backend API"
+        }, status=status.HTTP_200_OK)
+
+
 class EmployeeManagement(APIView):
 
     def __init__(self, **kwargs):
