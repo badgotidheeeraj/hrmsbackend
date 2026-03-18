@@ -23,8 +23,7 @@ class AttendanceSerializer(serializers.ModelSerializer):
             'employee_name',
             'date',
             'status',
-            'check_in_time',
-            'check_out_time',
+            'check_in_time'
         ]
         read_only_fields = ['id', 'employee_code', 'employee_name']
         validators = [

@@ -6,7 +6,7 @@ from .models import Employee, Attendance
 
 @admin.register(Attendance)
 class AttendanceAdmin(admin.ModelAdmin):
-    list_display = ('employee', 'date', 'check_in_time', 'check_out_time')
+    list_display = ('employee', 'date', 'check_in_time')
     search_fields = ('employee__full_name', 'date')
     list_filter = ('date', 'employee')
 @admin.register(Employee)

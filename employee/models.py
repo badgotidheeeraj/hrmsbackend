@@ -36,8 +36,7 @@ class Attendance(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='attendances')
     date = models.DateField()
     status = models.CharField(max_length=8, choices=STATUS_CHOICES)
-    check_in_time = models.TimeField(null=True, blank=True)
-    check_out_time = models.TimeField(null=True, blank=True)
+    check_in_time = models.TimeField(auto_now=True ,null=True, blank=True)
 
     class Meta:
         unique_together = ('employee', 'date')
