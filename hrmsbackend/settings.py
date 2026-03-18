@@ -1,7 +1,4 @@
 from pathlib import Path
-
-
-import os
 from dotenv import load_dotenv
 from urllib.parse import urlparse, parse_qsl
 
@@ -109,6 +106,8 @@ WSGI_APPLICATION = 'hrmsbackend.wsgi.application'
 # Add these at the top of your settings.py
 
 # Replace the DATABASES section of your settings.py with this
+
+
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 DATABASES = {
@@ -118,11 +117,13 @@ DATABASES = {
         'USER': tmpPostgres.username,
         'PASSWORD': tmpPostgres.password,
         'HOST': tmpPostgres.hostname,
-        'PORT': 5432,
-        'OPTIONS': dict(parse_qsl(tmpPostgres.query)),
+        'PORT': tmpPostgres.port or 5432,
+        'OPTIONS': {
+            **dict(parse_qsl(tmpPostgres.query)),
+            'sslmode': 'require',
+        },
     }
 }
-
 
 
 
