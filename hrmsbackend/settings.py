@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-nf9!0bdvkis&a8+l3u+x00vtu8f3^s96+x)z5!=7uvz42h-!q9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -26,8 +26,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'employee',
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -36,10 +39,37 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+   'corsheaders.middleware.CorsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'hrmsbackend.urls'
+
+
+
+
+
+CORS_ALLOWED_ORIGINS = [
+    "https://hrmsfront-end.vercel.app",
+    "http://localhost:3000",  
+    ]
+
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
+
+CROSS_ORIGIN_ALLOW_ALL = True
+
+
+
+
 
 TEMPLATES = [
     {

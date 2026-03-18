@@ -9,19 +9,19 @@ class Employee(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def save(self, *args, **kwargs):
-        if not self.employee_id:   # Only generate on create
-            last_employee = Employee.objects.order_by('-id').first()
+    def create_employee(self, validated_data):
+        last_employee = Employee.objects.order_by('-id').first()
 
-            if last_employee and last_employee.employee_id:
-                last_number = int(last_employee.employee_id.replace("EMP", ""))
-                new_number = last_number + 1
-            else:
-                new_number = 1
+        if last_employee:
+            last_id = int(last_employee.empid.replace('EMP', ''))
+            new_id = f"EMP{last_id + 1:03d}"
+        else:
+            new_id = "EMP001"
 
-            self.employee_id = f"EMP{new_number:03d}"
+        validated_data["empid"] = new_id
 
-        super().save(*args, **kwargs)
+        employee = Employee.objects.create(**validated_data)
+        return employee
 
 
 
@@ -30,6 +30,7 @@ class Attendance(models.Model):
     STATUS_CHOICES = [
         ('Present', 'Present'),
         ('Absent', 'Absent'),
+        ('On Leave', 'On Leave'),
     ]
 
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='attendances')
